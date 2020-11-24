@@ -38,7 +38,7 @@ class InstagramSpider(scrapy.Spider):
             video = i['node']['is_video']
             date_posted_timestamp = i['node']['taken_at_timestamp']
             date_posted_human = datetime.fromtimestamp(date_posted_timestamp).strftime("%d/%m/%Y %H:%M:%S")
-            like_count = i['node']['edge_liked_by']['count'] if "edge_liked_by" in i['node'].keys() else ''
+            like_count = i['node']['edge_media_preview_like']['count'] if "edge_media_preview_like" in i['node'].keys() else ''
             comment_count = i['node']['edge_media_to_comment']['count'] if 'edge_media_to_comment' in i[
                 'node'].keys() else ''
             captions = ""
@@ -87,7 +87,7 @@ class InstagramSpider(scrapy.Spider):
                     captions += i2['node']['text'] + "\n"
             comment_count = i['node']['edge_media_to_comment']['count'] if 'edge_media_to_comment' in i['node'].keys() else ''
             date_posted_human = datetime.fromtimestamp(date_posted_timestamp).strftime("%d/%m/%Y %H:%M:%S")
-            like_count = i['node']['edge_liked_by']['count'] if "edge_liked_by" in i['node'].keys() else ''
+            like_count = i['node']['edge_media_preview_like']['count'] if "edge_media_preview_like" in i['node'].keys() else ''
             item = {'postURL': url, 'isVideo': video, 'date_posted': date_posted_human,
                     'timestamp': date_posted_timestamp, 'likeCount': like_count, 'commentCount': comment_count,
                     'image_url': image_url,
